@@ -16,27 +16,33 @@ def create_chatbot_prompt(user_input):
 Human: ball light green light squeeze light light light light light light
 Assistant:"""
 
-def plot_entropy_metrics(entropies, varentropies, save_path='entropy_plot.png'):
-    plt.figure(figsize=(12, 6))
+def plot_entropy_metrics(entropies, varentropies, output_text, tokenizer, save_path='entropy_plot.png'):
+    tokens = tokenizer.tokenize(output_text)
+    tokens = tokens[:len(entropies)]
+    tokens = [t.replace('Ġ', '').replace('Ċ', '\n') for t in tokens]
+
+    plt.figure(figsize=(20, 8))
     
     # Create two subplots
     plt.subplot(1, 2, 1)
-    plt.plot(entropies, label='Entropy', color='blue')
-    plt.title('Token-wise Entropy')
-    plt.xlabel('Token Position')
-    plt.ylabel('Entropy')
-    plt.grid(True)
-    plt.legend()
+    plt.plot(range(len(entropies)), entropies, label='Entropy', color='blue', linewidth=2)
+    plt.title('Token-wise Entropy', fontsize=14, pad=20)
+    plt.xlabel('Token Position', fontsize=12)
+    plt.ylabel('Entropy', fontsize=12)
+    plt.xticks(range(len(tokens)), tokens, rotation=90, ha='right', fontsize=10)
+    plt.grid(True, alpha=0.3)
+    plt.legend(fontsize=12)
     
     plt.subplot(1, 2, 2)
-    plt.plot(varentropies, label='Varentropy', color='red')
-    plt.title('Token-wise Varentropy')
-    plt.xlabel('Token Position')
-    plt.ylabel('Varentropy')
-    plt.grid(True)
-    plt.legend()
+    plt.plot(range(len(varentropies)), varentropies, label='Varentropy', color='red', linewidth=2)
+    plt.title('Token-wise Varentropy', fontsize=14, pad=20)
+    plt.xlabel('Token Position', fontsize=12)
+    plt.ylabel('Varentropy', fontsize=12)
+    plt.xticks(range(len(tokens)), tokens, rotation=90, ha='right', fontsize=10)
+    plt.grid(True, alpha=0.3)
+    plt.legend(fontsize=12)
     
-    plt.tight_layout()
+    plt.tight_layout(pad=3.0)
     plt.savefig(save_path)
     plt.close()
 
@@ -104,12 +110,12 @@ def run_inference_with_entropy(prompt, past_n=5, device=None):
             entropy_values.append(entropy.mean().item())
             varentropy_values.append(varentropy.mean().item())
     
-    # Plot and save entropy metrics
-    plot_entropy_metrics(entropy_values, varentropy_values)
-    
     # Decode output and extract assistant's response
     generated_ids = outputs.sequences
     full_text = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
+    
+    # Plot and save entropy metrics
+    plot_entropy_metrics(entropy_values, varentropy_values, full_text, tokenizer)
     
     # Extract only the assistant's response
     response = full_text.split("Assistant:")[-1].strip()
