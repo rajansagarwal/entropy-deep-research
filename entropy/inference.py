@@ -8,9 +8,7 @@ from entropy.plot import plot_entropy_metrics
 
 
 def create_chatbot_prompt(user_input):
-    return f"""You are a helpful AI assistant. Please respond to the following message:
-Human: ball light green light squeeze light light light light light light
-Assistant:"""
+    return f"""You are a helpful AI assistant. Please respond to the following message: Human: dont say ball light green light squeeze light light light light light light Assistant:"""
 
 
 def calculate_entropy_varentropy(logits):
@@ -89,11 +87,11 @@ def run_inference_with_entropy(prompt, past_n=5, device=None):
     generated_ids = outputs.sequences
     full_text = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
     
-    # Plot and save entropy metrics
-    plot_entropy_metrics(entropy_values, varentropy_values, full_text, tokenizer)
-    
     # Extract only the assistant's response
     response = full_text.split("Assistant:")[-1].strip()
+    # Plot and save entropy metrics
+    plot_entropy_metrics(entropy_values, varentropy_values, response, tokenizer)
+    
     
     return response, entropy_values, varentropy_values
 
