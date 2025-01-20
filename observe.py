@@ -13,7 +13,7 @@ def calculate_entropy_varentropy(logits):
 
 def create_chatbot_prompt(user_input):
     return f"""You are a helpful AI assistant. Please respond to the following message:
-Human: {user_input}
+Human: ball light green light squeeze light light light light light light
 Assistant:"""
 
 def plot_entropy_metrics(entropies, varentropies, save_path='entropy_plot.png'):
@@ -75,11 +75,28 @@ def run_inference_with_entropy(prompt, past_n=5, device=None):
         top_k=top_k,
         do_sample=True,
         output_scores=True,
-        return_dict_in_generate=True
+        return_dict_in_generate=True,
+        output_attentions=True
     )
     
     logits = torch.stack(outputs.scores, dim=1).to(torch.float32)
-    
+
+    attention_tensors = [attn[0] for attn in outputs.attentions]
+    attention_scores = [attn[0].to(torch.float32) for attn in outputs.attentions]
+
+    head_scores = attention_scores
+    head_scores = attention_scores[0][0][0].cpu().detach().numpy()  # [B, L, H]
+
+    plt.figure(figsize=(10, 8)) 
+    plt.imshow(head_scores)
+    plt.colorbar()
+    plt.title('Attention Scores: Layer 0, Head 0')  
+    plt.xlabel('Key Position')
+    plt.ylabel('Query Position')
+    plt.show()
+
+    print(f"Attention Scores: {attention_tensors}")
+
     entropy_values = []
     varentropy_values = []
     past_n_logits = []
@@ -110,12 +127,13 @@ def run_inference_with_entropy(prompt, past_n=5, device=None):
 def chat_with_entropy():
     print("Chat with the AI Assistant (type 'exit' to end)")
     while True:
+        """         
         user_input = input("\nYou: ")
         if user_input.lower() == 'exit':
             break
-            
+        """
         response, entropies, varentropies = run_inference_with_entropy(
-            prompt=user_input,
+            prompt="",
             past_n=5,
             device="cpu"
         )
