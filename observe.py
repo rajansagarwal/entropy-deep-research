@@ -86,16 +86,8 @@ def run_inference_with_entropy(prompt, past_n=5, device=None):
 
     head_scores = attention_scores
     head_scores = attention_scores[0][0][0].cpu().detach().numpy()  # [B, L, H]
-
-    plt.figure(figsize=(10, 8)) 
-    plt.imshow(head_scores)
-    plt.colorbar()
-    plt.title('Attention Scores: Layer 0, Head 0')  
-    plt.xlabel('Key Position')
-    plt.ylabel('Query Position')
-    plt.show()
-
-    print(f"Attention Scores: {attention_tensors}")
+    
+    print(f"Attention Scores: {head_scores}")
 
     entropy_values = []
     varentropy_values = []
@@ -140,6 +132,7 @@ def chat_with_entropy():
         
         print(f"\nAssistant: {response}")
         print("\nEntropy metrics have been saved to 'entropy_plot.png'")
+        break
 
 if __name__ == "__main__":
     chat_with_entropy()
