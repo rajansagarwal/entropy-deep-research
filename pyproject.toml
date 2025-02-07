@@ -3,7 +3,8 @@ name = "entropy-cot"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Elijah Kurien",email = "elijahkurien05@gmail.com"}
+    {name = "Elijah Kurien",email = "elijahkurien05@gmail.com"},
+    {name = "Rajan Agarwal",email = "rajan.ag005@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
