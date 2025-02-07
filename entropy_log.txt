@@ -1,0 +1,32 @@
+Entropy Log for Prompt: Show me the answer to the multiplication of 181 * 223?
+
+--------------------------------------------------
+Window at step 9: avg_entropy=1.417, avg_varentropy=2.311
+Window at step 10: avg_entropy=1.033, avg_varentropy=1.555
+Window at step 11: avg_entropy=0.873, avg_varentropy=1.479
+Window at step 12: avg_entropy=0.806, avg_varentropy=1.547
+Window at step 13: avg_entropy=0.895, avg_varentropy=1.814
+Window at step 14: avg_entropy=0.889, avg_varentropy=1.799
+Window at step 15: avg_entropy=0.668, avg_varentropy=1.606
+Window at step 16: avg_entropy=0.735, avg_varentropy=1.981
+Window at step 17: avg_entropy=0.822, avg_varentropy=2.250
+Window at step 18: avg_entropy=0.964, avg_varentropy=2.285
+Window at step 19: avg_entropy=1.019, avg_varentropy=2.558
+Window at step 20: avg_entropy=1.083, avg_varentropy=2.782
+Window at step 21: avg_entropy=1.158, avg_varentropy=3.373
+Window at step 22: avg_entropy=1.313, avg_varentropy=3.634
+Window at step 23: avg_entropy=1.246, avg_varentropy=3.527
+Window at step 24: avg_entropy=1.307, avg_varentropy=3.900
+Window at step 25: avg_entropy=1.585, avg_varentropy=4.430
+Window at step 26: avg_entropy=1.642, avg_varentropy=4.317
+Window at step 27: avg_entropy=1.919, avg_varentropy=4.778
+Window at step 28: avg_entropy=1.715, avg_varentropy=4.607
+Window at step 29: avg_entropy=1.608, avg_varentropy=4.284
+Window at step 30: avg_entropy=1.719, avg_varentropy=4.796
+Window at step 31: avg_entropy=1.774, avg_varentropy=4.706
+Window at step 32: avg_entropy=1.630, avg_varentropy=4.544
+Window at step 33: avg_entropy=1.634, avg_varentropy=4.587
+Window at step 34: avg_entropy=1.825, avg_varentropy=4.626
+Window at step 35: avg_entropy=1.794, avg_varentropy=4.678
+Window at step 36: avg_entropy=1.468, avg_varentropy=4.107
+Window at step 37: avg_entropy=1.033, avg_varentropy=3.297
